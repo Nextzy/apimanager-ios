@@ -11,32 +11,21 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
   s.exclude_files = '**/AppDelegate.swift'
-  s.resources = 'CommonClassMyAIS-Resources/**/*.{xcassets,storyboard,xib,xcdatamodeld,lproj,crt,cer}'
-  s.preserve_paths = 'CommonClassMyAIS-Resources/**/*.{lproj}',
 
   s.framework  = 'UIKit'
-  s.preserve_paths = 'Crashlytics.framework'
   s.requires_arc = true
   s.default_subspec = 'All'
   s.subspec 'All' do |ss|
-    ss.ios.dependency 'CommonClassMyAIS/CommonMyAIS'
-    ss.ios.dependency 'CommonClassMyAIS/CommonMyAIS-Lib'
-    ss.ios.dependency 'CommonClassMyAIS/GlobalFile'
+    ss.ios.dependency 'APIManager/Network'
+
 
     ss.dependency 'Alamofire'
 
   end
 
-  s.subspec 'CommonMyAIS' do |ss|
-    ss.source_files  = 'CommonMyAIS/**/*'
+  s.subspec 'Network' do |ss|
+    ss.source_files  = 'Network/**/*'
   end
 
-  s.subspec 'CommonMyAIS-Lib' do |ss|
-  	ss.source_files  = 'CommonClassMyAIS-Lib/**/*'
-  end
-
-  s.subspec 'GlobalFile' do |ss|
-    ss.source_files  = 'GlobalPrefix-Files/**/*'
-  end
 
 end
