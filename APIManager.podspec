@@ -16,16 +16,19 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.default_subspec = 'All'
   s.subspec 'All' do |ss|
-    ss.ios.dependency 'APIManager/Network'
-
+    ss.ios.dependency 'APIManager/Responses'
+    ss.ios.dependency 'APIManager/Managers'
 
     ss.dependency 'Alamofire'
 
   end
 
-  s.subspec 'Network' do |ss|
-    ss.source_files  = 'Network/**/*'
+  s.subspec 'Responses' do |ss|
+    ss.source_files  = 'Responses/**/*'
   end
 
+  s.subspec 'Managers' do |ss|
+    ss.source_files  = 'Managers/**/*'
+  end
 
 end
