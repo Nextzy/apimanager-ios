@@ -40,25 +40,25 @@ public class BaseManager {
         headers["Content-Type"] = "application/json; charset=utf-8"
     }
     
-    func get<Result: Decodable>(url: String, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) {
-        self.sendRequest(url: url, httpMethod: .get, responseType: responseType, completion: completion, failure: failure)
+    func get<Result: Decodable>(url: String, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) -> Request? {
+        return self.sendRequest(url: url, httpMethod: .get, responseType: responseType, completion: completion, failure: failure)
     }
     
     func post<Body: Encodable, Result: Decodable>(url: String, body: Body, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) {
-        self.sendRequest(url: url, httpMethod: .post, body: body, responseType: responseType, completion: completion, failure: failure)
+        _ = self.sendRequest(url: url, httpMethod: .post, body: body, responseType: responseType, completion: completion, failure: failure)
     }
     
-    private func sendRequest<Body: Encodable, Result: Decodable>(url: String, httpMethod: HTTPMethod, body: Body? = nil, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) {
+    private func sendRequest<Body: Encodable, Result: Decodable>(url: String, httpMethod: HTTPMethod, body: Body? = nil, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) -> Request? {
         var parameters: [String: Any]?
         if let unwrappedBody = body {
             let data = try! JSONEncoder().encode(unwrappedBody)
             parameters = try! JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
         }
-        self.sendRequest(url: url, httpMethod: httpMethod, parameters: parameters, responseType: responseType, completion: completion, failure: failure)
+        return self.sendRequest(url: url, httpMethod: httpMethod, parameters: parameters, responseType: responseType, completion: completion, failure: failure)
     }
     
-    private func sendRequest<Result: Decodable>(url: String, httpMethod: HTTPMethod, parameters: [String: Any]? = nil, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) {
-        Alamofire.request(url, method: httpMethod, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+    private func sendRequest<Result: Decodable>(url: String, httpMethod: HTTPMethod, parameters: [String: Any]? = nil, responseType: Result.Type, completion: @escaping (_ result: Result?, _ message: ResultMessage) -> (), failure: @escaping (_ error: ResultMessage) -> ()) -> Request? {
+        return Alamofire.request(url, method: httpMethod, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseJSON { response in
                 self.handleResponse(response, responseType: responseType, completion: completion, failure: failure, secretKeyRenewedCompletion: { () -> () in
                     self.sendRequest(url: url, httpMethod: httpMethod, parameters: parameters, responseType: responseType, completion: completion, failure: failure)
