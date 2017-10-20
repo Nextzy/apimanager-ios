@@ -32,3 +32,20 @@ struct Response<T: Decodable>: Decodable {
         result = try container.decode(T.self, forKey: .result)
     }
 }
+
+{
+    "status_code": "",
+    "message_title": "",
+    "message_body": "",
+    "system_error_message": "",
+    "result": {
+        "user_id": "1",
+        "user_name": "",
+        "first_name": "",
+        "last_name": "",
+        "tel": "",
+        "address": {
+            
+        }
+    }
+}
