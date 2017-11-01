@@ -24,11 +24,11 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Responses' do |ss|
-    ss.source_files  = 'Responses/**/*'
+    ss.source_files  = 'APIManager/Responses/**/*'
   end
 
   s.subspec 'Managers' do |ss|
-    ss.source_files  = 'Managers/**/*'
+    ss.source_files  = 'APIManager/Managers/**/*'
   end
 
 end

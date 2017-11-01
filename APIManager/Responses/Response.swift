@@ -33,19 +33,20 @@ struct Response<T: Decodable>: Decodable {
     }
 }
 
-{
-    "status_code": "",
-    "message_title": "",
-    "message_body": "",
-    "system_error_message": "",
-    "result": {
-        "user_id": "1",
-        "user_name": "",
-        "first_name": "",
-        "last_name": "",
-        "tel": "",
-        "address": {
-            
-        }
-    }
-}
+//{
+//    "status_code": "",
+//    "message_title": "",
+//    "message_body": "",
+//    "system_error_message": "",
+//    "result": {
+//        "user_id": "1",
+//        "user_name": "",
+//        "first_name": "",
+//        "last_name": "",
+//        "tel": "",
+//        "address": {
+//
+//        }
+//    }
+//}
+
